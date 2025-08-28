@@ -1,0 +1,55 @@
+
+    <link rel="stylesheet" href="/style.css">
+
+<div class="main">
+  <h1>SIGN IN</h1>
+  <h4 class="text-danger">{{msg}}</h4>
+  
+  <form id="loginForm" action="/verify" method="post" novalidate>
+    <div class="mb-3">
+      <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
+      <div id="usernameError" class="error"></div>
+    </div>
+
+    <div class="mb-3">
+      <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+      <div id="passwordError" class="error"></div>
+    </div>
+    
+        <div class="wrap">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+
+</div>
+
+   
+<script>
+    const form = document.getElementById('loginForm');
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+    const usernameError = document.getElementById('usernameError');
+    const passwordError = document.getElementById('passwordError');
+
+    form.addEventListener('submit', function (e) {
+        let valid = true;
+        usernameError.textContent = '';
+        passwordError.textContent = '';
+
+       
+        if (username.value.trim().length < 3 || username.value.trim().length > 15) {
+            usernameError.textContent = 'Username must be between 3 and 15 characters';
+            valid = false;
+        }
+
+        
+        if (password.value.length < 6) {
+            passwordError.textContent = 'Password must be at least 6 characters';
+            valid = false;
+        }
+
+        if (!valid) {
+            e.preventDefault();
+        }
+    });
+</script>
